@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kartu Fakta Menarik — Negara Jepang</title>
+  <style>
+    body{
+      background-image: url("background.jpg");
+    }
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 25px 25px 0px 0px;
+    }
+    div.card-fakta{
+      width: 60%;
+      border-radius: 25px;
+      background-color: white;
+      box-shadow: 0 4px 8px 0
+      rgba(0, 0, 0, 0.2), 0 6px 20px 0
+      rgba(0, 0, 0, 0.19);
+      margin-bottom: 25px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2{
+      text-align: center;
+      font-style: initial;
+    }
+    p{
+      text-align: center;
+      font-style: initial;
+    }
+    button.btn-next{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-fakta">
+    <img id="factImage" src="images.jpg" alt="Jepang" />
+    <div class="content">
+      <h2>Fakta Menarik tentang Jepang</h2>
+      <p class="subtitle">Tahukah kamu fakta-fakta unik ini?</p>
+
+      <ul class="facts-list" id="factList">
+        <li>Negara dengan Vending Machine Terbanyak</li>
+        <li>Toilet Super Canggih</li>
+        <li>Perpustakaan tertua di dunia</li>
+        <li>Pulau Kelinci</li>
+      </ul>
+
+      <button class="btn-next" id="nextFact">🔁 Fakta Selanjutnya</button>
+    </div>
+  </div>
+
+  <script>
+    const factData = [
+      {
+        image: "download.jpg",
+        facts: [
+          "Di Jepang, ada lebih dari 200 gunung berapi",
+          "Hampir tidak ada imigrasi di Jepang. Populasi adalah 98% etnis Jepang",
+          "Perekonomian Jepang termasuk yang terbesar ketiga di dunia setelah AS dan China",
+          "Jepang adalah negara dengan tingkat melek huruf hampir 100%"
+          
+        ]
+      },
+      {
+        image: "jepang.jpg",
+        facts: [
+          "Jepang mengenal empat teknik menulis yang berbeda, yaitu romaji, katakana, hiragana, dan kanji",
+          "Gunung Fuji adalah gunung api aktif tertinggi di Jepang",
+          "Daging kuda mentah merupakan makanan yang sangat populer di Jepang",
+          "Jepang telah menghasilkan 18 pemenang hadiah Nobel"
+        ]
+      },
+    ];
+
+    const factList = document.getElementById("factList");
+    const factImage = document.getElementById("factImage");
+    const nextBtn = document.getElementById("nextFact");
+
+    nextBtn.addEventListener("click", () => {
+      factList.classList.add("fade-out");
+      setTimeout(() => {
+        const randomFact = factData[Math.floor(Math.random() * factData.length)];
+        factImage.style.opacity = 0;
+
+        setTimeout(() => {
+          factImage.src = randomFact.image;
+          factImage.style.opacity = 1;
+        }, 400);
+
+        factList.innerHTML = randomFact.facts.map(f => `<li>${f}</li>`).join("");
+        factList.classList.remove("fade-out");
+      }, 500);
+    });
+  </script>
+</body>
+</html>
